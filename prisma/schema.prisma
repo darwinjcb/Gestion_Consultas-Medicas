@@ -39,26 +39,30 @@ model Especialidad {
 }
 
 model Doctor {
-  id_doctor       Int          @id @default(autoincrement())
-  nombre          String
-  telefono        String?
-  email           String?      @unique
+  id_doctor Int     @id @default(autoincrement())
+  nombre    String
+  telefono  String?
+  email     String? @unique
+
   id_especialidad Int
   especialidad    Especialidad @relation(fields: [id_especialidad], references: [id_especialidad])
 
   citas   Cita[]
   usuario Usuario?
+
+  @@index([id_especialidad])
 }
 
 model Usuario {
   id_usuario Int        @id @default(autoincrement())
   username   String     @unique
-  // Para JWT real: agrega passwordHash (recomendado)
   password   String
   rol        RolUsuario
 
   id_doctor Int?    @unique
   doctor    Doctor? @relation(fields: [id_doctor], references: [id_doctor])
+
+  @@index([id_doctor])
 }
 
 model Cita {
@@ -74,6 +78,10 @@ model Cita {
   doctor    Doctor @relation(fields: [id_doctor], references: [id_doctor])
 
   receta Receta?
+
+  @@index([id_paciente])
+  @@index([id_doctor])
+  @@index([fecha])
 }
 
 model Receta {
@@ -85,6 +93,9 @@ model Receta {
   cita    Cita @relation(fields: [id_cita], references: [id_cita])
 
   medicamentos RecetaMedica[]
+
+  @@index([id_cita])
+  @@index([fecha_emision])
 }
 
 model Medicamento {
@@ -101,8 +112,10 @@ model RecetaMedica {
 
   id_medicamento Int
   medicamento    Medicamento @relation(fields: [id_medicamento], references: [id_medicamento])
-  dosis          String
-  frecuencia     String
+
+  dosis      String
+  frecuencia String
 
   @@id([id_receta, id_medicamento])
+  @@index([id_medicamento])
 }
