@@ -195,7 +195,7 @@ export type PacienteGroupByOutputType = {
   id_paciente: number
   fecha_nacimiento: Date
   nombre: string
-  apellido: string
+  apellido: string | null
   direccion: string | null
   email: string | null
   telefono: string | null
@@ -228,7 +228,7 @@ export type PacienteWhereInput = {
   id_paciente?: Prisma.IntFilter<"Paciente"> | number
   fecha_nacimiento?: Prisma.DateTimeFilter<"Paciente"> | Date | string
   nombre?: Prisma.StringFilter<"Paciente"> | string
-  apellido?: Prisma.StringFilter<"Paciente"> | string
+  apellido?: Prisma.StringNullableFilter<"Paciente"> | string | null
   direccion?: Prisma.StringNullableFilter<"Paciente"> | string | null
   email?: Prisma.StringNullableFilter<"Paciente"> | string | null
   telefono?: Prisma.StringNullableFilter<"Paciente"> | string | null
@@ -239,7 +239,7 @@ export type PacienteOrderByWithRelationInput = {
   id_paciente?: Prisma.SortOrder
   fecha_nacimiento?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
-  apellido?: Prisma.SortOrder
+  apellido?: Prisma.SortOrderInput | Prisma.SortOrder
   direccion?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   telefono?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -254,7 +254,7 @@ export type PacienteWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PacienteWhereInput | Prisma.PacienteWhereInput[]
   fecha_nacimiento?: Prisma.DateTimeFilter<"Paciente"> | Date | string
   nombre?: Prisma.StringFilter<"Paciente"> | string
-  apellido?: Prisma.StringFilter<"Paciente"> | string
+  apellido?: Prisma.StringNullableFilter<"Paciente"> | string | null
   direccion?: Prisma.StringNullableFilter<"Paciente"> | string | null
   telefono?: Prisma.StringNullableFilter<"Paciente"> | string | null
   citas?: Prisma.CitaListRelationFilter
@@ -264,7 +264,7 @@ export type PacienteOrderByWithAggregationInput = {
   id_paciente?: Prisma.SortOrder
   fecha_nacimiento?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
-  apellido?: Prisma.SortOrder
+  apellido?: Prisma.SortOrderInput | Prisma.SortOrder
   direccion?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   telefono?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -282,7 +282,7 @@ export type PacienteScalarWhereWithAggregatesInput = {
   id_paciente?: Prisma.IntWithAggregatesFilter<"Paciente"> | number
   fecha_nacimiento?: Prisma.DateTimeWithAggregatesFilter<"Paciente"> | Date | string
   nombre?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
-  apellido?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
+  apellido?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
   direccion?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
   telefono?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
@@ -291,7 +291,7 @@ export type PacienteScalarWhereWithAggregatesInput = {
 export type PacienteCreateInput = {
   fecha_nacimiento: Date | string
   nombre: string
-  apellido: string
+  apellido?: string | null
   direccion?: string | null
   email?: string | null
   telefono?: string | null
@@ -302,7 +302,7 @@ export type PacienteUncheckedCreateInput = {
   id_paciente?: number
   fecha_nacimiento: Date | string
   nombre: string
-  apellido: string
+  apellido?: string | null
   direccion?: string | null
   email?: string | null
   telefono?: string | null
@@ -312,7 +312,7 @@ export type PacienteUncheckedCreateInput = {
 export type PacienteUpdateInput = {
   fecha_nacimiento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
-  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -323,7 +323,7 @@ export type PacienteUncheckedUpdateInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_nacimiento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
-  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -334,7 +334,7 @@ export type PacienteCreateManyInput = {
   id_paciente?: number
   fecha_nacimiento: Date | string
   nombre: string
-  apellido: string
+  apellido?: string | null
   direccion?: string | null
   email?: string | null
   telefono?: string | null
@@ -343,7 +343,7 @@ export type PacienteCreateManyInput = {
 export type PacienteUpdateManyMutationInput = {
   fecha_nacimiento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
-  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -353,7 +353,7 @@ export type PacienteUncheckedUpdateManyInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_nacimiento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
-  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -439,7 +439,7 @@ export type PacienteUpdateOneRequiredWithoutCitasNestedInput = {
 export type PacienteCreateWithoutCitasInput = {
   fecha_nacimiento: Date | string
   nombre: string
-  apellido: string
+  apellido?: string | null
   direccion?: string | null
   email?: string | null
   telefono?: string | null
@@ -449,7 +449,7 @@ export type PacienteUncheckedCreateWithoutCitasInput = {
   id_paciente?: number
   fecha_nacimiento: Date | string
   nombre: string
-  apellido: string
+  apellido?: string | null
   direccion?: string | null
   email?: string | null
   telefono?: string | null
@@ -474,7 +474,7 @@ export type PacienteUpdateToOneWithWhereWithoutCitasInput = {
 export type PacienteUpdateWithoutCitasInput = {
   fecha_nacimiento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
-  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -484,7 +484,7 @@ export type PacienteUncheckedUpdateWithoutCitasInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_nacimiento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
-  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -580,7 +580,7 @@ export type $PacientePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id_paciente: number
     fecha_nacimiento: Date
     nombre: string
-    apellido: string
+    apellido: string | null
     direccion: string | null
     email: string | null
     telefono: string | null

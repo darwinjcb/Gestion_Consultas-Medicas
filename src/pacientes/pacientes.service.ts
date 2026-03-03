@@ -15,6 +15,7 @@ export class PacientesService {
                 data: {
                     fecha_nacimiento: new Date(dto.fecha_nacimiento),
                     nombre: dto.nombre,
+                    apellido: dto.apellido ?? undefined, // ✅ opcional
                     direccion: dto.direccion,
                     email: dto.email,
                     telefono: dto.telefono,
@@ -60,6 +61,7 @@ export class PacientesService {
                         ? new Date(dto.fecha_nacimiento)
                         : undefined,
                     nombre: dto.nombre,
+                    apellido: dto.apellido ?? undefined, // ✅ opcional
                     direccion: dto.direccion,
                     email: dto.email,
                     telefono: dto.telefono,

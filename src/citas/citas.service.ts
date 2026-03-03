@@ -90,7 +90,7 @@ export class CitasService {
         });
     }
 
-    // ✅ REQUERIMIENTO 6: actualización masiva de estado por un día
+    /* REQUERIMIENTO 6 */
     async actualizarEstadoMasivoPorDia(fechaISO: string, estado: EstadoCita) {
         const inicio = new Date(`${fechaISO}T00:00:00.000Z`);
         const fin = new Date(`${fechaISO}T23:59:59.999Z`);

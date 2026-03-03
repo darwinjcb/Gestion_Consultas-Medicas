@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ReportesService {
     constructor(private readonly prisma: PrismaService) { }
 
-    // ✅ REQUERIMIENTO 4
+    /* REQUERIMIENTO 4 */
     async medicamentosMasRecetadosUltimoMes() {
         const desde = new Date();
         desde.setMonth(desde.getMonth() - 1);
@@ -45,7 +45,7 @@ export class ReportesService {
         }));
     }
 
-    // ✅ REQUERIMIENTO 5
+    /* REQUERIMIENTO 5 */
     async pacientesSinCitasUltimosSeisMeses() {
         const desde = new Date();
         desde.setMonth(desde.getMonth() - 6);
@@ -62,7 +62,7 @@ export class ReportesService {
         });
     }
 
-    // ✅ REQUERIMIENTO 7
+    /* REQUERIMIENTO 7 */
     async totalCitasPorEspecialidadYDoctor() {
         const porDoctorRaw = await this.prisma.cita.groupBy({
             by: ['id_doctor'],
@@ -121,18 +121,17 @@ export class ReportesService {
         return { porEspecialidad, porDoctor };
     }
 
-    // ✅ REQUERIMIENTO 10
-    // Buscar pacientes por nombre (parcial) y devolver total de citas + fecha de última cita
+    /* REQUERIMIENTO 10 */
     async buscarPacientesConResumen(q: string) {
         const termino = (q ?? '').trim();
         if (!termino) return [];
 
         const pacientes = await this.prisma.paciente.findMany({
             where: {
-                nombre: {
-                    contains: termino,
-                    mode: 'insensitive',
-                },
+                OR: [
+                    { nombre: { contains: termino, mode: 'insensitive' } },
+                    { apellido: { contains: termino, mode: 'insensitive' } },
+                ],
             },
             include: {
                 citas: {
@@ -146,11 +145,18 @@ export class ReportesService {
             orderBy: { id_paciente: 'desc' },
         });
 
-        return pacientes.map((p) => ({
-            id_paciente: p.id_paciente,
-            nombre: p.nombre,
-            total_citas: p._count.citas,
-            ultima_cita: p.citas.length > 0 ? p.citas[0].fecha : null,
-        }));
+        return pacientes.map((p) => {
+            const apellido = p.apellido ?? '';
+            const nombreCompleto = `${p.nombre} ${apellido}`.trim();
+
+            return {
+                id_paciente: p.id_paciente,
+                nombre: p.nombre,
+                apellido: p.apellido, // puede ser null
+                nombre_completo: nombreCompleto,
+                total_citas: p._count.citas,
+                ultima_cita: p.citas.length > 0 ? p.citas[0].fecha : null,
+            };
+        });
     }
 }

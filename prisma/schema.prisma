@@ -25,28 +25,28 @@ model Paciente {
   id_paciente      Int      @id @default(autoincrement())
   fecha_nacimiento DateTime
   nombre           String
-  apellido         String // REQUERIMIENTO 10
+  apellido         String? // REQUERIMIENTO 10
   direccion        String?
   email            String?  @unique
   telefono         String?
-  citas Cita[]
+  citas            Cita[]
 }
 
 model Especialidad {
-  id_especialidad Int    @id @default(autoincrement())
-  nombre          String @unique
-  doctores Doctor[]
+  id_especialidad Int      @id @default(autoincrement())
+  nombre          String   @unique
+  doctores        Doctor[]
 }
 
 model Doctor {
-  id_doctor Int     @id @default(autoincrement())
-  nombre    String
-  telefono  String?
-  email     String? @unique
+  id_doctor       Int          @id @default(autoincrement())
+  nombre          String
+  telefono        String?
+  email           String?      @unique
   id_especialidad Int
   especialidad    Especialidad @relation(fields: [id_especialidad], references: [id_especialidad])
-  citas   Cita[]
-  usuario Usuario?
+  citas           Cita[]
+  usuario         Usuario?
 
   @@index([id_especialidad])
 }
@@ -56,21 +56,21 @@ model Usuario {
   username   String     @unique
   password   String
   rol        RolUsuario
-  id_doctor Int?    @unique
-  doctor    Doctor? @relation(fields: [id_doctor], references: [id_doctor])
+  id_doctor  Int?       @unique
+  doctor     Doctor?    @relation(fields: [id_doctor], references: [id_doctor])
 
   @@index([id_doctor])
 }
 
 model Cita {
-  id_cita Int        @id @default(autoincrement())
-  fecha   DateTime
-  motivo  String
-  estado  EstadoCita @default(pendiente)
+  id_cita     Int        @id @default(autoincrement())
+  fecha       DateTime
+  motivo      String
+  estado      EstadoCita @default(pendiente)
   id_paciente Int
-  paciente    Paciente @relation(fields: [id_paciente], references: [id_paciente])
-  id_doctor Int
-  doctor    Doctor @relation(fields: [id_doctor], references: [id_doctor])
+  paciente    Paciente   @relation(fields: [id_paciente], references: [id_paciente])
+  id_doctor   Int
+  doctor      Doctor     @relation(fields: [id_doctor], references: [id_doctor])
 
   receta Receta?
 
@@ -94,19 +94,20 @@ model Receta {
 }
 
 model Medicamento {
-  id_medicamento Int     @id @default(autoincrement())
-  nombre         String  @unique
+  id_medicamento Int            @id @default(autoincrement())
+  nombre         String         @unique
   descripcion    String?
-  recetas RecetaMedica[]
+  recetas        RecetaMedica[]
 }
 
 model RecetaMedica {
-  id_receta Int
-  receta    Receta @relation(fields: [id_receta], references: [id_receta])
+  id_receta      Int
+  receta         Receta      @relation(fields: [id_receta], references: [id_receta])
   id_medicamento Int
   medicamento    Medicamento @relation(fields: [id_medicamento], references: [id_medicamento])
-  dosis      String
-  frecuencia String
+  dosis          String
+  frecuencia     String
+
   @@id([id_receta, id_medicamento])
   @@index([id_medicamento])
 }
