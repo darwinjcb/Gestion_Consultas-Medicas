@@ -11,9 +11,10 @@ import { CitasModule } from './citas/citas.module';
 import { MedicamentosModule } from './medicamentos/medicamentos.module';
 import { RecetasModule } from './recetas/recetas.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { ReportesModule } from './reportes/reportes.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, PacientesModule, EspecialidadesModule, DoctoresModule, CitasModule, MedicamentosModule, RecetasModule, UsuariosModule],
+  imports: [PrismaModule, AuthModule, PacientesModule, EspecialidadesModule, DoctoresModule, CitasModule, MedicamentosModule, RecetasModule, UsuariosModule, ReportesModule],
   controllers: [AppController],
   providers: [AppService],
 })
