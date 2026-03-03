@@ -81,6 +81,7 @@ export const PacienteScalarFieldEnum = {
   id_paciente: 'id_paciente',
   fecha_nacimiento: 'fecha_nacimiento',
   nombre: 'nombre',
+  apellido: 'apellido',
   direccion: 'direccion',
   email: 'email',
   telefono: 'telefono'
