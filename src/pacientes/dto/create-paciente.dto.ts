@@ -1,3 +1,4 @@
+// src/pacientes/dto/create-paciente.dto.ts:
 import { IsDateString, IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class CreatePacienteDto {

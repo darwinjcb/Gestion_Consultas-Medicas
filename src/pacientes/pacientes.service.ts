@@ -1,3 +1,4 @@
+// src/pacientes/pacientes.service.ts:
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePacienteDto } from './dto/create-paciente.dto';
